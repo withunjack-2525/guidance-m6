@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>นวัตกรรมการแนะแนว ม.6 — ครูแนะแนว</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --pu:#534AB7;--pul:#EEEDFE;--pud:#2B2570;
+  --te:#1D9E75;--tel:#E1F5EE;--ted:#085041;
+  --am:#C07B1A;--aml:#FDF3E1;--amd:#6B3E00;
+  --ro:#C0415A;--rol:#FCEEF1;--rod:#6B1527;
+  --bl:#185FA5;--bll:#E6F1FB;--bld:#042C53;
+  --gr:#2D9F3A;--grl:#E8F7EA;--grd:#114D18;
+  --bg:#fff;--bg2:#f5f5f3;--text:#1a1a1a;--muted:#6b6b68;
+  --border:rgba(0,0,0,0.1);--r:10px;--rl:16px;
+}
+body{font-family:'Sarabun','Noto Sans Thai',sans-serif;background:var(--bg2);color:var(--text);min-height:100vh;margin:0;}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,#2B2570 0%,#534AB7 50%,#185FA5 100%);padding:3rem 1.5rem 4rem;text-align:center;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:40px;background:var(--bg2);border-radius:50% 50% 0 0 / 40px 40px 0 0;}
+.hero-icon{font-size:56px;margin-bottom:1rem;}
+.hero h1{font-size:26px;font-weight:700;color:#fff;margin-bottom:.5rem;line-height:1.4;}
+.hero p{font-size:14px;color:rgba(255,255,255,0.85);line-height:1.8;max-width:480px;margin:0 auto;}
+.hero-badges{display:flex;justify-content:center;gap:8px;margin-top:1.25rem;flex-wrap:wrap;}
+.hero-badge{font-size:12px;padding:5px 14px;border-radius:20px;font-weight:500;background:rgba(255,255,255,0.18);color:#fff;}
+
+/* Main */
+main{max-width:680px;margin:0 auto;padding:1.5rem 1rem 3rem;}
+
+/* Section title */
+.sec-title{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin:1.5rem 0 .75rem;}
+
+/* How-to */
+.howto-row{display:flex;gap:0;margin-bottom:1.5rem;background:var(--bg);border-radius:var(--rl);border:0.5px solid var(--border);overflow:hidden;}
+.howto-step{flex:1;text-align:center;padding:1rem .5rem;position:relative;}
+.howto-step:not(:last-child)::after{content:'→';position:absolute;right:-8px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;z-index:1;}
+.howto-num{width:28px;height:28px;border-radius:50%;background:var(--pul);color:var(--pu);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto .4rem;}
+.howto-text{font-size:11px;color:var(--muted);line-height:1.4;}
+
+/* Cards */
+.cards{display:grid;gap:12px;}
+.card{background:var(--bg);border-radius:var(--rl);border:0.5px solid var(--border);overflow:hidden;text-decoration:none;color:inherit;display:block;transition:box-shadow .2s,transform .15s;}
+.card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.1);transform:translateY(-2px);}
+.card-header{padding:1rem 1.25rem .75rem;display:flex;align-items:flex-start;gap:14px;}
+.card-icon-wrap{width:44px;height:44px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.card-num{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;margin-bottom:4px;display:inline-block;}
+.card-title{font-size:15px;font-weight:700;line-height:1.3;margin-bottom:3px;}
+.card-sub{font-size:12px;color:var(--muted);line-height:1.5;}
+.card-footer{padding:.6rem 1.25rem .75rem;border-top:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.card-tags{display:flex;gap:5px;flex-wrap:wrap;}
+.card-tag{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500;}
+.card-arrow{font-size:13px;font-weight:700;display:flex;align-items:center;gap:4px;}
+.card-meta{font-size:11px;color:var(--muted);}
+
+/* Tip box */
+.tip-box{background:var(--pul);border-radius:var(--rl);padding:1rem 1.25rem;margin-top:1.5rem;}
+.tip-title{font-size:13px;font-weight:700;color:var(--pud);margin-bottom:.5rem;}
+.tip-list{list-style:none;}
+.tip-list li{font-size:12px;color:var(--pud);padding:3px 0;display:flex;gap:8px;line-height:1.6;}
+.tip-list li::before{content:"💡";flex-shrink:0;}
+
+/* Footer */
+footer{text-align:center;padding:1.5rem 1rem;font-size:11px;color:var(--muted);border-top:0.5px solid var(--border);}
+
+@media(max-width:480px){
+  .hero{padding:2rem 1rem 3rem;}
+  .hero h1{font-size:21px;}
+  .howto-step{padding:.75rem .35rem;}
+  .howto-text{font-size:10px;}
+}
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap');
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-icon">🎓</div>
+  <h1>นวัตกรรมการแนะแนว<br>สำหรับนักเรียน ม.6</h1>
+  <p>ชุดแบบทดสอบและเครื่องมือแนะแนวครบวงจร<br>ค้นพบตัวเอง เลือกคณะ และวางแผนอนาคตอย่างมั่นใจ</p>
+  <div class="hero-badges">
+    <span class="hero-badge">5 นวัตกรรม</span>
+    <span class="hero-badge">ครอบคลุม 5 ด้าน สพฐ.</span>
+    <span class="hero-badge">ฟรี ไม่ต้องสมัคร</span>
+  </div>
+</div>
+
+<main>
+
+  <div class="sec-title">วิธีใช้งาน</div>
+  <div class="howto-row">
+    <div class="howto-step">
+      <div class="howto-num">1</div>
+      <div class="howto-text">เลือกนวัตกรรมที่ต้องการ</div>
+    </div>
+    <div class="howto-step">
+      <div class="howto-num">2</div>
+      <div class="howto-text">ทำแบบทดสอบตามขั้นตอน</div>
+    </div>
+    <div class="howto-step">
+      <div class="howto-num">3</div>
+      <div class="howto-text">รับผลทันที</div>
+    </div>
+    <div class="howto-step">
+      <div class="howto-num">4</div>
+      <div class="howto-text">พิมพ์ผลให้ครูแนะแนว</div>
+    </div>
+  </div>
+
+  <div class="sec-title">เลือกนวัตกรรม</div>
+  <div class="cards">
+
+    <!-- ชิ้นที่ 1 -->
+    <a class="card" href="guidance_faculty_quiz_m6_v2.html">
+      <div class="card-header">
+        <div class="card-icon-wrap" style="background:#EEEDFE;">🎓</div>
+        <div>
+          <div class="card-num" style="background:#EEEDFE;color:#2B2570;">ชิ้นที่ 1 · ด้านการศึกษา</div>
+          <div class="card-title">แบบทดสอบแนะแนวเลือกคณะ</div>
+          <div class="card-sub">วิเคราะห์ความสนใจ ทักษะ บุคลิกภาพ และแรงบันดาลใจ เพื่อแนะนำ 17 คณะที่เหมาะสม พร้อมข้อมูล TCAS และมหาวิทยาลัย</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div>
+          <div class="card-tags">
+            <span class="card-tag" style="background:#EEEDFE;color:#2B2570;">30 ข้อ</span>
+            <span class="card-tag" style="background:#EEEDFE;color:#2B2570;">7 หมวด</span>
+            <span class="card-tag" style="background:#EEEDFE;color:#2B2570;">~15 นาที</span>
+          </div>
+          <div class="card-meta" style="margin-top:4px;">เหมาะกับ: ทุกคนที่ยังไม่แน่ใจว่าจะเรียนคณะอะไร</div>
+        </div>
+        <div class="card-arrow" style="color:#534AB7;">เริ่ม →</div>
+      </div>
+    </a>
+
+    <!-- ชิ้นที่ 2 -->
+    <a class="card" href="guidance_riasec_eq_m6.html">
+      <div class="card-header">
+        <div class="card-icon-wrap" style="background:#E6F1FB;">🧠</div>
+        <div>
+          <div class="card-num" style="background:#E6F1FB;color:#042C53;">ชิ้นที่ 2 · ด้านส่วนตัว</div>
+          <div class="card-title">บุคลิกภาพ RIASEC + EQ</div>
+          <div class="card-sub">ค้นพบบุคลิกภาพ 6 ด้านตามทฤษฎี Holland Code และวัดความฉลาดทางอารมณ์ 5 ด้าน เพื่อเข้าใจตัวเองอย่างลึกซึ้ง</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div>
+          <div class="card-tags">
+            <span class="card-tag" style="background:#E6F1FB;color:#042C53;">42 ข้อ</span>
+            <span class="card-tag" style="background:#E6F1FB;color:#042C53;">2 ส่วน</span>
+            <span class="card-tag" style="background:#E6F1FB;color:#042C53;">~15 นาที</span>
+          </div>
+          <div class="card-meta" style="margin-top:4px;">เหมาะกับ: ทำก่อนชิ้นที่ 1 เพื่อรู้จักตัวเองก่อนเลือกคณะ</div>
+        </div>
+        <div class="card-arrow" style="color:#185FA5;">เริ่ม →</div>
+      </div>
+    </a>
+
+    <!-- ชิ้นที่ 3 -->
+    <a class="card" href="guidance_leadership_social_m6.html">
+      <div class="card-header">
+        <div class="card-icon-wrap" style="background:#EEEDFE;">👑</div>
+        <div>
+          <div class="card-num" style="background:#EEEDFE;color:#2B2570;">ชิ้นที่ 3 · ด้านสังคม</div>
+          <div class="card-title">ทักษะสังคม + ความเป็นผู้นำ</div>
+          <div class="card-sub">ค้นพบสไตล์ผู้นำ 6 แบบ วัดทักษะการสื่อสาร การแก้ขัดแย้ง และการทำงานเป็นทีม ผ่านสถานการณ์จำลอง 10 ฉาก</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div>
+          <div class="card-tags">
+            <span class="card-tag" style="background:#EEEDFE;color:#2B2570;">36 ข้อ</span>
+            <span class="card-tag" style="background:#EEEDFE;color:#2B2570;">3 ส่วน</span>
+            <span class="card-tag" style="background:#EEEDFE;color:#2B2570;">~12 นาที</span>
+          </div>
+          <div class="card-meta" style="margin-top:4px;">เหมาะกับ: ทุกคนที่อยากรู้จุดแข็งด้านสังคมของตัวเอง</div>
+        </div>
+        <div class="card-arrow" style="color:#534AB7;">เริ่ม →</div>
+      </div>
+    </a>
+
+    <!-- ชิ้นที่ 4 -->
+    <a class="card" href="guidance_mental_health_m6.html">
+      <div class="card-header">
+        <div class="card-icon-wrap" style="background:#E1F5EE;">💚</div>
+        <div>
+          <div class="card-num" style="background:#E1F5EE;color:#085041;">ชิ้นที่ 4 · ด้านสุขภาพ</div>
+          <div class="card-title">สุขภาพจิต + จัดการความเครียด</div>
+          <div class="card-sub">ประเมินระดับความเครียด การนอนหลับ ทักษะรับมือ และพลังใจ พร้อมแผนดูแลตัวเอง 4 สัปดาห์ก่อนสอบ TCAS</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div>
+          <div class="card-tags">
+            <span class="card-tag" style="background:#E1F5EE;color:#085041;">32 ข้อ</span>
+            <span class="card-tag" style="background:#E1F5EE;color:#085041;">4 ด้าน</span>
+            <span class="card-tag" style="background:#E1F5EE;color:#085041;">~10 นาที</span>
+          </div>
+          <div class="card-meta" style="margin-top:4px;">เหมาะกับ: ทำช่วงใกล้สอบหรือเมื่อรู้สึกเครียด</div>
+        </div>
+        <div class="card-arrow" style="color:#1D9E75;">เริ่ม →</div>
+      </div>
+    </a>
+
+    <!-- ชิ้นที่ 5 -->
+    <a class="card" href="guidance_tcas_timeline_m6.html">
+      <div class="card-header">
+        <div class="card-icon-wrap" style="background:#FDF3E1;">📅</div>
+        <div>
+          <div class="card-num" style="background:#FDF3E1;color:#6B3E00;">ชิ้นที่ 5 · วางแผน TCAS</div>
+          <div class="card-title">แผน TCAS Timeline ส่วนตัว</div>
+          <div class="card-sub">สร้าง Checklist ส่วนตัวตามคณะและสนามสอบที่เลือก แบ่งเป็น 6 ช่วงเวลา มิ.ย.67–มิ.ย.68 ติ๊กถูกงานที่เสร็จแล้วได้ทันที</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div>
+          <div class="card-tags">
+            <span class="card-tag" style="background:#FDF3E1;color:#6B3E00;">30+ งาน</span>
+            <span class="card-tag" style="background:#FDF3E1;color:#6B3E00;">6 ช่วงเวลา</span>
+            <span class="card-tag" style="background:#FDF3E1;color:#6B3E00;">ส่วนตัว</span>
+          </div>
+          <div class="card-meta" style="margin-top:4px;">เหมาะกับ: ทำตลอดปี ม.6 เพื่อติดตามความคืบหน้า</div>
+        </div>
+        <div class="card-arrow" style="color:#C07B1A;">เริ่ม →</div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="tip-box">
+    <div class="tip-title">📌 แนะนำลำดับการทำ</div>
+    <ul class="tip-list">
+      <li>เริ่มที่ชิ้นที่ 2 (RIASEC+EQ) ก่อน เพื่อรู้จักตัวเองก่อนเลือกคณะ</li>
+      <li>ต่อด้วยชิ้นที่ 1 (เลือกคณะ) เพื่อเชื่อมโยงบุคลิกภาพกับคณะที่เหมาะ</li>
+      <li>ทำชิ้นที่ 3 (ผู้นำ) และชิ้นที่ 4 (สุขภาพจิต) ตามลำดับ</li>
+      <li>ใช้ชิ้นที่ 5 (TCAS Timeline) วางแผนและติดตามตลอดปี ม.6</li>
+      <li>พิมพ์ผลลัพธ์ทุกชิ้นให้ครูแนะแนวเพื่อวางแผนต่อยอดรายบุคคล</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  นวัตกรรมการแนะแนว ชั้น ม.6 · ครอบคลุม 5 ด้านตามแนวทาง สพฐ.<br>
+  จัดทำโดย ครูแนะแนว · ปีการศึกษา 2567
+</footer>
+
+</body>
+</html>
